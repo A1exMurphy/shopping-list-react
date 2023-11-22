@@ -1,7 +1,7 @@
 CREATE TABLE shopping_list (
     "id" SERIAL PRIMARY KEY,
     "Name" VARCHAR(80) NOT NULL,
-    "Quantity" DECIMAL,
+    "Quantity" NUMERIC(6,2),
     "Unit" VARCHAR(20)
 );
 
