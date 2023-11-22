@@ -14,3 +14,6 @@ DELETE FROM shopping_list
 UPDATE "shopping_list"
 	SET "Unit" = 'Super delicious'
 	WHERE "id" = ($1);
+
+SELECT * FROM "shopping_list"
+    ORDER BY "Name" ASC;

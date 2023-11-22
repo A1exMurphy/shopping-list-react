@@ -70,11 +70,14 @@ function App() {
                 <ul>
                     {shoppingList.map(item => (
                      <li key={item.id}>
-                        {item.Name} {item.Quantity} {item.Unit}
-                     </li>  
+                       <button>mark if bought</button> 
+                        {item.Name} 
+                        {item.Quantity} 
+                        {item.Unit} 
+                       <span><RemoveItemFromList id={item.id} retrieveList={retrieveList}/></span>
+                     </li>
                     ) 
                     )}
-                    
                 </ul>
             </main>
         </div>

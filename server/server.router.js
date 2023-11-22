@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     let queryText = 
         `
         SELECT * FROM "shopping_list"
-            ORDER BY "id";
+            ORDER BY "Name" ASC;;
         `
         pool.query(queryText)
             .then((dbresult) => {
