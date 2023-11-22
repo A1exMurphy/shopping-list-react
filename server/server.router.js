@@ -26,16 +26,21 @@ router.get('/', (req, res) => {
 
 //POST route
 router.post('/', (req, res) => {
-    console.log('in POST route')
+    console.log('in POST route', req.body)
+    let newItem = req.body;
+
     let queryText = 
         `
         INSERT INTO shopping_list ("Name", "Quantity", "Unit")
-            VALUES ($1, $2,
+            VALUES ($1, $2, $3)
         `
         console.log(req.body, `req.body`)
+
         const sqlValues = [
-            req.body//.newItem
-        ]
+            newItem.Name, 
+            newItem.Quantity,
+            newItem.Unit
+]
 
             pool.query(queryText, sqlValues)
             .then((dbResult) => {

@@ -1,25 +1,55 @@
 import React from 'react';
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 import Header from '../Header/Header.jsx'
 import './App.css';
 
 
 
 function App() {
-    let [shoppingList, showShoppingList] = useState([]);
+    let [shoppingList, setShoppingList] = useState([]);
 
     let [itemName, setName] = useState(``);
     let [itemQuantity, setQuantity] = useState(``);
     let [itemUnit, setUnit] = useState(``)
 
-    const createListItem = (e) => {
-        e.preventDefault()
+    //intiate GET to display shopping list on load
+    useEffect(() => {
+        retrieveList()
+    }, []);
+
+
+    const retrieveList = () => {
+        axios.get('/shoppinglist') 
+            .then(response => {
+                console.log(response.data)
+                setShoppingList(response.data)
+        })
+        .catch(err => {
+            alert(`error getting shopping list from db`)
+        })
     }
+    // const createListItem = (e) => {
+    //     e.preventDefault()
+    //     axios.post('/shoppinglist', {
+    //         Name: itemName, Quantity: itemQuantity, Unit: itemUnit})
+    //         .then(response => {
+    //             setName('');
+    //             setQuantity('');
+    //             setUnit('');
+
+    //                 //rerender the shopping list after update
+    //                 retrieveList();
+    //         })
+    //         .catch(err => {
+    //             alert(`error getting item inputs`);
+    //         })
+    // }
     return (
         <div className="App">
             <Header />
             <main>
-                <form onSubmit={createListItem}>
+                <form >
                     <input
                         value={itemName}
                         placeholder="Name"
