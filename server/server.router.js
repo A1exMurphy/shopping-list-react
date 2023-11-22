@@ -12,6 +12,13 @@ router.get('/', (req, res) => {
         SELECT * FROM "shopping_list"
             ORDER BY "id";
         `
+   .then((dbresult) => {
+        console.log(dbresult.rows, 'this is the db result.rows');
+        res.send(dbresult.rows);
+    }).catch(dbError => {
+        console.log(`error GET db table`, dbError)
+        res.sendStatus(500)
+    })
 })
 
 
