@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         `
         pool.query(queryText)
             .then((dbresult) => {
-        console.log(dbresult.rows, 'this is the db result.rows');
+        // console.log(dbresult.rows, 'this is the db result.rows');
         res.send(dbresult.rows);
     }).catch(dbError => {
         console.log(`error GET db table`, dbError)

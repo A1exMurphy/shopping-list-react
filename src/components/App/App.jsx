@@ -22,34 +22,34 @@ function App() {
     const retrieveList = () => {
         axios.get('/shoppinglist') 
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setShoppingList(response.data)
         })
         .catch(err => {
             alert(`error getting shopping list from db`)
         })
     }
-    // const createListItem = (e) => {
-    //     e.preventDefault()
-    //     axios.post('/shoppinglist', {
-    //         Name: itemName, Quantity: itemQuantity, Unit: itemUnit})
-    //         .then(response => {
-    //             setName('');
-    //             setQuantity('');
-    //             setUnit('');
+    const createListItem = (e) => {
+        e.preventDefault()
+        axios.post('/shoppinglist', {
+            Name: itemName, Quantity: itemQuantity, Unit: itemUnit})
+            .then(response => {
+                setName('');
+                setQuantity('');
+                setUnit('');
 
-    //                 //rerender the shopping list after update
-    //                 retrieveList();
-    //         })
-    //         .catch(err => {
-    //             alert(`error getting item inputs`);
-    //         })
-    // }
+                    //rerender the shopping list after update
+                    retrieveList();
+            })
+            .catch(err => {
+                alert(`error getting item inputs`);
+            })
+    }
     return (
         <div className="App">
             <Header />
             <main>
-                <form >
+                <form onSubmit={createListItem}>
                     <input
                         value={itemName}
                         placeholder="Name"
@@ -65,7 +65,17 @@ function App() {
                         placeholder="Unit"
                         onChange={(e) => setUnit(e.target.value)}
                     />
+                    <button>Add</button>
                 </form>
+                <ul>
+                    {shoppingList.map(item => (
+                     <li key={item.id}>
+                        {item.Name} {item.Quantity} {item.Unit}
+                     </li>  
+                    ) 
+                    )}
+                    
+                </ul>
             </main>
         </div>
     );
